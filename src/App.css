@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: Nunito;
+  src: url("./font/Nunito/Nunito-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  font-family: Nunito, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  background-color: #0a0c10;
+}
+
+.react-resizable-handle {
+  display: none;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: #19191b;
+  border-radius: 30px;
+  transition-duration: 350ms;
+  opacity: 0.5;
+}
+
+.react-grid-item {
+  transition: all 300ms ease;
+  transition-property: left, top, width, height, background;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.linkedin {
+  animation-name: animate;
+  animation-duration: 1.2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes animate {
+  /* 0% {
+    filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px #fff)
+      drop-shadow(0 0 8px #80b3ff) drop-shadow(0 0 24px #4d94ff)
+      drop-shadow(0 0 40px #0066ff);
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  100% {
+    filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px #fff)
+      drop-shadow(0 0 12px #80b3ff) drop-shadow(0 0 32px #4d94ff)
+      drop-shadow(0 0 48px #0066ff);
+  } */
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  /* Less intense animation */
+  0% {
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.7))
+      drop-shadow(0 0 2px rgba(128, 179, 255, 0.8))
+      drop-shadow(0 0 8px rgba(77, 148, 255, 0.6))
+      drop-shadow(0 0 20px rgba(0, 102, 255, 0.4));
   }
-  to {
-    transform: rotate(360deg);
+
+  100% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 4px rgba(128, 179, 255, 0.9))
+      drop-shadow(0 0 12px rgba(77, 148, 255, 0.7))
+      drop-shadow(0 0 25px rgba(0, 102, 255, 0.5));
   }
 }
