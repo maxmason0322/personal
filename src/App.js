@@ -140,6 +140,7 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 2px 8px 10px 3px black;
+  overflow: clip;
 
   &:hover {
     cursor: grab;

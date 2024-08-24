@@ -1,55 +1,111 @@
 import * as Form from "@radix-ui/react-form";
 import styled from "styled-components";
 import textStyles from "../styles/text";
-import { colorPalette } from "../styles/colors";
 import { ReactComponent as ArrowSVG } from "../icons/arrow.svg";
+import { ReactComponent as PlaneSVG } from "../icons/plane.svg";
+import emailjs from "@emailjs/browser";
+import { useState, useEffect } from "react";
+import gsap from "gsap";
 
 export default function ContactForm() {
+  const [successfulSubmission, setSuccessfulSubmission] = useState(false);
+
+  useEffect(() => {
+    if (successfulSubmission) {
+      gsap.to(Plane.toString(), {
+        duration: 2,
+        xPercent: 1600,
+        yPercent: -500,
+        rotate: 15,
+        scale: 1,
+        ease: "power1.inOut",
+      });
+    }
+  }, [successfulSubmission]);
+
   return (
     <Wrapper>
-      <Title>Contact Me</Title>
-      <Root
-        onMouseDown={(e) => e.stopPropagation()}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <Form.Field name="email">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "space-between",
+      {!successfulSubmission && (
+        <>
+          <Title>Contact Me</Title>
+          <Root
+            onMouseDown={(e) => e.stopPropagation()}
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              emailjs
+                .sendForm(
+                  "personal_site_form",
+                  "personal_site_form",
+                  e.target,
+                  {
+                    publicKey: "d_DnP9TcKEKY90kF2",
+                  }
+                )
+                .then(
+                  (result) => {
+                    console.log("Email sent successfully:", result.text);
+                    e.target.reset();
+                    setSuccessfulSubmission(true);
+                  },
+                  (error) => {
+                    console.log("Failed to send email:", error.text);
+                  }
+                );
             }}
           >
-            <Message match="valueMissing">Please enter an email</Message>
-            <Message match="typeMismatch">Please enter a valid email</Message>
-          </div>
-          <Form.Control asChild>
-            <Input type="email" placeholder="Email" required />
-          </Form.Control>
-        </Form.Field>
-        <Form.Field name="message">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "space-between",
-            }}
-          >
-            <Message match="valueMissing">Please include a message</Message>
-          </div>
-          <Form.Control asChild>
-            <TextArea placeholder="Write a message" required />
-          </Form.Control>
-        </Form.Field>
-        <Form.Submit asChild>
-          <Submit>
-            <Arrow />
-            Send Email
-          </Submit>
-        </Form.Submit>
-      </Root>
+            <Form.Field name="email">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Message match="valueMissing">Please enter an email</Message>
+                <Message match="typeMismatch">
+                  Please enter a valid email
+                </Message>
+              </div>
+              <Form.Control asChild>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  name="user_email"
+                  required
+                />
+              </Form.Control>
+            </Form.Field>
+            <Form.Field name="message">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Message match="valueMissing">Please include a message</Message>
+              </div>
+              <Form.Control asChild>
+                <TextArea placeholder="Write a message" required />
+              </Form.Control>
+            </Form.Field>
+            <Form.Submit asChild>
+              <Submit>
+                <Arrow />
+                Send Email
+              </Submit>
+            </Form.Submit>
+          </Root>
+        </>
+      )}
+      {successfulSubmission && (
+        <SuccessContent>
+          <div>Thanks for reaching out!</div>
+          <Plane />
+          <div>I'll get back to you as soon as possible! 🚀</div>
+        </SuccessContent>
+      )}
     </Wrapper>
   );
 }
@@ -76,9 +132,14 @@ const Root = styled(Form.Root)`
   padding: 24px;
 `;
 
-const Label = styled(Form.Label)`
+const SuccessContent = styled.div`
+  padding: 24px;
+  height: 100%;
   ${textStyles.body};
-  color: ${colorPalette.text.blue1};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.8);
 `;
 
 const Message = styled(Form.Message)`
@@ -156,27 +217,23 @@ const Submit = styled.button`
   color: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
   padding: 8px 18px 8px 10px;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.5s linear;
 
   svg {
     padding-top: 4px;
 
     path {
-      transition: all 0.3s linear;
+      transition: all 0.5s linear;
     }
   }
 
   &:hover {
     cursor: pointer;
-    color: whitesmoke;
-    border: 2px solid whitesmoke;
-
-    svg {
-      path {
-        fill: whitesmoke;
-      }
-    }
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 4px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
+      drop-shadow(0 0 25px rgba(200, 200, 200, 0.5));
   }
 `;
 
@@ -185,6 +242,19 @@ const Arrow = styled(ArrowSVG)`
   height: 24px;
   margin-bottom: 4px;
   transition: fill 0.3s linear;
+
+  path {
+    fill: rgba(255, 255, 255, 0.8);
+  }
+`;
+
+const Plane = styled(PlaneSVG)`
+  width: 57px;
+  height: 57px;
+  position: absolute;
+  rotate: 45deg;
+  bottom: 50px;
+  left: -100px;
 
   path {
     fill: rgba(255, 255, 255, 0.8);
