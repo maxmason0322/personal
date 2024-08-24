@@ -8,6 +8,7 @@ import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
 import "./App.css";
 import { ReactComponent as LinkedInSVG } from "./icons/linkedin.svg";
+import { ReactComponent as GithubSVG } from "./icons/github.svg";
 import ContactForm from "./components/ContactForm";
 import gsap from "gsap";
 
@@ -100,7 +101,15 @@ function AppContent() {
           </Box>
           <Box key="e">e</Box>
           <Box key="f">f</Box>
-          <Box key="g">g</Box>
+          <Box key="g">
+            <Github
+              onClick={(e) =>
+                handleRedirect(e, "https://github.com/maxmason0322")
+              }
+              onMouseDown={(e) => e.stopPropagation()}
+              className="github"
+            />
+          </Box>
         </Grid>
       </GridWrapper>
     </StyledThemeProvider>
@@ -138,6 +147,16 @@ const Box = styled.div`
 `;
 
 const LinkedIn = styled(LinkedInSVG)`
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+
+  path {
+    fill: #fff;
+  }
+`;
+
+const Github = styled(GithubSVG)`
   width: 100px;
   height: 100px;
   cursor: pointer;

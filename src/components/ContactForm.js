@@ -7,7 +7,7 @@ import { ReactComponent as ArrowSVG } from "../icons/arrow.svg";
 export default function ContactForm() {
   return (
     <Wrapper>
-      <Title>Say Hi!</Title>
+      <Title>Contact Me</Title>
       <Root
         onMouseDown={(e) => e.stopPropagation()}
         onSubmit={(e) => {
