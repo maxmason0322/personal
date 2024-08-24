@@ -1,9 +1,133 @@
-function App() {
+import GridLayout from "react-grid-layout";
+import styled, {
+  ThemeProvider as StyledThemeProvider,
+} from "styled-components";
+import { ThemeProvider, useTheme } from "./ThemeContext";
+import { useEffect } from "react";
+import "/node_modules/react-grid-layout/css/styles.css";
+import "/node_modules/react-resizable/css/styles.css";
+import "./App.css";
+import { ReactComponent as LinkedInSVG } from "./icons/linkedin.svg";
+import ContactForm from "./components/ContactForm";
+
+const GRID_WIDTH = 1200;
+
+const lightTheme = {
+  body: "#eaecef",
+  text: "#0A0C10",
+};
+
+const darkTheme = {
+  body: "#0A0C10",
+  text: "#eaecef",
+};
+
+function AppContent() {
+  const { isDarkMode } = useTheme();
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
+  const rowHeight = 270;
+  const margin = 15;
+
+  const calcHeight = (h) => {
+    return rowHeight * h + margin * (h - 1);
+  };
+
+  const handleRedirect = (e, url) => {
+    e.stopPropagation();
+    e.preventDefault();
+    window.open(url, "_blank");
+  };
+
+  const layout = [
+    { i: "a", x: 0, y: 0, w: 1, h: 1 },
+    { i: "b", x: 1, y: 0, w: 1, h: 1 },
+    { i: "c", x: 2, y: 1, w: 1, h: 1 },
+    { i: "d", x: 0, y: 1, w: 2, h: 1 },
+    { i: "e", x: 2, y: 2, w: 1, h: 1 },
+    { i: "f", x: 3, y: 0, w: 1, h: 1 },
+    { i: "g", x: 3, y: 1, w: 1, h: 1 },
+  ];
+
   return (
-    <div>
-      <h1>personal website</h1>
-    </div>
+    <StyledThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <GridWrapper>
+        <Grid
+          className="layout"
+          layout={layout}
+          cols={4}
+          rowHeight={rowHeight}
+          width={GRID_WIDTH}
+          margin={[margin, margin]}
+          useCSSTransforms
+        >
+          <Box key="a">
+            <LinkedIn
+              onClick={(e) =>
+                handleRedirect(e, "https://www.linkedin.com/in/maxdmason/")
+              }
+              onMouseDown={(e) => e.stopPropagation()}
+              className="linkedin"
+            />
+          </Box>
+          <Box key="b">
+            {/* <Link onMouseDown={(e) => e.stopPropagation()} /> */}
+            b
+          </Box>
+          <Box key="c">c</Box>
+          <Box key="d">
+            <ContactForm />
+          </Box>
+          <Box key="e">e</Box>
+          <Box key="f">f</Box>
+          <Box key="g">g</Box>
+        </Grid>
+      </GridWrapper>
+    </StyledThemeProvider>
   );
 }
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
+
+const GridWrapper = styled.div`
+  width: ${GRID_WIDTH}px;
+  margin: 0 auto;
+`;
+
+const Grid = styled(GridLayout)`
+  position: relative;
+`;
+
+const Box = styled.div`
+  background-color: #111113;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 8px 10px 3px black;
+
+  &:hover {
+    cursor: grab;
+  }
+`;
+
+const LinkedIn = styled(LinkedInSVG)`
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+
+  path {
+    fill: #fff;
+  }
+`;
 
 export default App;
