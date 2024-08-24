@@ -63,7 +63,7 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   ${textStyles.body};
-  padding: 16px 0 0 16px;
+  padding: 24px 0 0 24px;
   color: rgba(255, 255, 255, 0.8);
 `;
 
@@ -73,7 +73,7 @@ const Root = styled(Form.Root)`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 16px;
+  padding: 24px;
 `;
 
 const Label = styled(Form.Label)`
@@ -83,7 +83,7 @@ const Label = styled(Form.Label)`
 
 const Message = styled(Form.Message)`
   position: absolute;
-  right: 16px;
+  right: 24px;
   padding-top: 12px;
   color: #ff1e56;
   ${textStyles.message};
@@ -145,8 +145,8 @@ const TextArea = styled.textarea`
 
 const Submit = styled.button`
   position: absolute;
-  bottom: 16px;
-  right: 16px;
+  bottom: 24px;
+  right: 24px;
   ${textStyles.body2};
   display: flex;
   align-items: center;

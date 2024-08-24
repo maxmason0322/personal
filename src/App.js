@@ -3,12 +3,13 @@ import styled, {
   ThemeProvider as StyledThemeProvider,
 } from "styled-components";
 import { ThemeProvider, useTheme } from "./ThemeContext";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
 import "./App.css";
 import { ReactComponent as LinkedInSVG } from "./icons/linkedin.svg";
 import ContactForm from "./components/ContactForm";
+import gsap from "gsap";
 
 const GRID_WIDTH = 1200;
 
@@ -24,6 +25,7 @@ const darkTheme = {
 
 function AppContent() {
   const { isDarkMode } = useTheme();
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
 
   useEffect(() => {
     document.body.setAttribute("data-theme", isDarkMode ? "dark" : "light");
@@ -41,6 +43,22 @@ function AppContent() {
     e.preventDefault();
     window.open(url, "_blank");
   };
+
+  window.addEventListener("load", () => {
+    setIsFullyLoaded(true);
+  });
+
+  useEffect(() => {
+    if (isFullyLoaded) {
+      gsap.to(".layout", {
+        duration: 1,
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        delay: 1,
+      });
+    }
+  }, [isFullyLoaded]);
 
   const layout = [
     { i: "a", x: 0, y: 0, w: 1, h: 1 },
@@ -74,8 +92,7 @@ function AppContent() {
             />
           </Box>
           <Box key="b">
-            {/* <Link onMouseDown={(e) => e.stopPropagation()} /> */}
-            b
+            {/* <Link onMouseDown={(e) => e.stopPropagation()} /> */}b
           </Box>
           <Box key="c">c</Box>
           <Box key="d">
@@ -90,7 +107,7 @@ function AppContent() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider>
       <AppContent />
@@ -129,5 +146,3 @@ const LinkedIn = styled(LinkedInSVG)`
     fill: #fff;
   }
 `;
-
-export default App;
