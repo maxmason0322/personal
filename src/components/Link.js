@@ -1,6 +1,6 @@
 import { ReactComponent as ArrowSVG } from "../icons/arrow.svg";
-import { colorPalette } from "../styles/colors";
 import styled from "styled-components";
+import colors from "../styles/colors";
 
 export default function Link() {
   return (
@@ -15,6 +15,6 @@ const Arrow = styled(ArrowSVG)`
   height: 20px;
 
   path {
-    fill: rgba(255, 255, 255, 0.8);
+    fill: ${colors.white};
   }
 `;

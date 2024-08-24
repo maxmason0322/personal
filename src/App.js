@@ -11,6 +11,7 @@ import { ReactComponent as LinkedInSVG } from "./icons/linkedin.svg";
 import { ReactComponent as GithubSVG } from "./icons/github.svg";
 import ContactForm from "./components/ContactForm";
 import gsap from "gsap";
+import { colors } from "./styles/colors";
 
 const GRID_WIDTH = 1200;
 
@@ -92,9 +93,7 @@ function AppContent() {
               className="linkedin"
             />
           </Box>
-          <Box key="b">
-            {/* <Link onMouseDown={(e) => e.stopPropagation()} /> */}b
-          </Box>
+          <Box key="b">b</Box>
           <Box key="c">c</Box>
           <Box key="d">
             <ContactForm />
@@ -134,7 +133,7 @@ const Grid = styled(GridLayout)`
 `;
 
 const Box = styled.div`
-  background-color: #111113;
+  background-color: ${colors.black};
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -153,7 +152,7 @@ const LinkedIn = styled(LinkedInSVG)`
   cursor: pointer;
 
   path {
-    fill: #fff;
+    fill: white;
   }
 `;
 
@@ -163,6 +162,6 @@ const Github = styled(GithubSVG)`
   cursor: pointer;
 
   path {
-    fill: #fff;
+    fill: white;
   }
 `;

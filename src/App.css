@@ -54,19 +54,6 @@ body {
 }
 
 @keyframes animate {
-  /* 0% {
-    filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px #fff)
-      drop-shadow(0 0 8px #80b3ff) drop-shadow(0 0 24px #4d94ff)
-      drop-shadow(0 0 40px #0066ff);
-  }
-
-  100% {
-    filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px #fff)
-      drop-shadow(0 0 12px #80b3ff) drop-shadow(0 0 32px #4d94ff)
-      drop-shadow(0 0 48px #0066ff);
-  } */
-
-  /* Less intense animation */
   0% {
     filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.7))
       drop-shadow(0 0 2px rgba(128, 179, 255, 0.8))

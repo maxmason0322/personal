@@ -1,11 +1,12 @@
 import * as Form from "@radix-ui/react-form";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import textStyles from "../styles/text";
 import { ReactComponent as ArrowSVG } from "../icons/arrow.svg";
 import { ReactComponent as PlaneSVG } from "../icons/plane.svg";
 import emailjs from "@emailjs/browser";
 import { useState, useEffect } from "react";
 import gsap from "gsap";
+import { colors } from "../styles/colors";
 
 export default function ContactForm() {
   const [successfulSubmission, setSuccessfulSubmission] = useState(false);
@@ -55,18 +56,8 @@ export default function ContactForm() {
             }}
           >
             <Form.Field name="email">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Message match="valueMissing">Please enter an email</Message>
-                <Message match="typeMismatch">
-                  Please enter a valid email
-                </Message>
-              </div>
+              <Message match="valueMissing">Please enter an email</Message>
+              <Message match="typeMismatch">Please enter a valid email</Message>
               <Form.Control asChild>
                 <Input
                   type="email"
@@ -77,15 +68,7 @@ export default function ContactForm() {
               </Form.Control>
             </Form.Field>
             <Form.Field name="message">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Message match="valueMissing">Please include a message</Message>
-              </div>
+              <Message match="valueMissing">Please include a message</Message>
               <Form.Control asChild>
                 <TextArea placeholder="Write a message" required />
               </Form.Control>
@@ -120,7 +103,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
   ${textStyles.body};
   padding: 24px 0 0 24px;
-  color: rgba(255, 255, 255, 0.8);
+  color: ${colors.white};
 `;
 
 const Root = styled(Form.Root)`
@@ -139,69 +122,52 @@ const SuccessContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: rgba(255, 255, 255, 0.8);
+  color: ${colors.white};
 `;
 
 const Message = styled(Form.Message)`
   position: absolute;
   right: 24px;
   padding-top: 12px;
-  color: #ff1e56;
+  color: ${colors.red};
   ${textStyles.message};
   letter-spacing: 0.3px;
 `;
 
-const Input = styled.input`
+const inputProperties = css`
+  position: relative;
   ${textStyles.body2};
   width: 100%;
-  position: relative;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid ${colors.white};
   background: transparent;
-  padding: 8px 0;
-  caret-color: rgba(255, 255, 255, 0.8);
-  color: whitesmoke;
+  caret-color: ${colors.white};
+  color: white;
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.8);
+    color: ${colors.white};
   }
 
   &:focus {
     outline: none;
-    border-bottom: 1px solid whitesmoke;
-    caret-color: whitesmoke;
+    border-bottom: 1px solid white;
+    caret-color: white;
 
     &::placeholder {
-      color: whitesmoke;
+      color: white;
     }
   }
 `;
 
+const Input = styled.input`
+  ${inputProperties};
+  padding: 8px 0;
+`;
+
 const TextArea = styled.textarea`
-  position: relative;
-  ${textStyles.body2};
-  width: 100%;
-  border: none;
-  resize: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  background: transparent;
+  ${inputProperties};
   padding: 8px 0 16px 0;
-  color: whitesmoke;
-  caret-color: rgba(255, 255, 255, 0.8);
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  &:focus {
-    outline: none;
-    border-bottom: 1px solid whitesmoke;
-    caret-color: whitesmoke;
-
-    &::placeholder {
-      color: whitesmoke;
-    }
-  }
+  resize: none;
 `;
 
 const Submit = styled.button`
@@ -213,8 +179,8 @@ const Submit = styled.button`
   align-items: center;
   gap: 8px;
   background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  color: rgba(255, 255, 255, 0.8);
+  border: 2px solid ${colors.white};
+  color: ${colors.white};
   border-radius: 30px;
   padding: 8px 18px 8px 10px;
   -webkit-transition: all 0.5s linear;
@@ -244,7 +210,7 @@ const Arrow = styled(ArrowSVG)`
   transition: fill 0.3s linear;
 
   path {
-    fill: rgba(255, 255, 255, 0.8);
+    fill: ${colors.white};
   }
 `;
 
@@ -257,6 +223,6 @@ const Plane = styled(PlaneSVG)`
   left: -100px;
 
   path {
-    fill: rgba(255, 255, 255, 0.8);
+    fill: ${colors.white};
   }
 `;
