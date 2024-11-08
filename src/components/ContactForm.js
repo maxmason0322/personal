@@ -4,12 +4,13 @@ import textStyles from "../styles/text";
 import { ReactComponent as ArrowSVG } from "../icons/arrow.svg";
 import { ReactComponent as PlaneSVG } from "../icons/plane.svg";
 import emailjs from "@emailjs/browser";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { colors } from "../styles/colors";
 
 export default function ContactForm() {
   const [successfulSubmission, setSuccessfulSubmission] = useState(false);
+  const submitContentRef = useRef(null)
 
   useEffect(() => {
     if (successfulSubmission) {
@@ -23,6 +24,22 @@ export default function ContactForm() {
       });
     }
   }, [successfulSubmission]);
+
+  const slideUp = () => {
+    gsap.to(submitContentRef.current, {
+      yPercent: -60,
+      duration: 1,
+      ease: "power2.inOut",
+    })
+  }
+
+  const slideDown = () => {
+    gsap.to(submitContentRef.current, {
+      yPercent: 0,
+      duration: 1,
+      ease: "power2.inOut",
+    })
+  }
 
   return (
     <Wrapper>
@@ -75,8 +92,16 @@ export default function ContactForm() {
             </Form.Field>
             <Form.Submit asChild>
               <Submit>
-                <Arrow />
-                Send Email
+                <SubmitContent ref={submitContentRef} onMouseEnter={slideUp} onMouseLeave={slideDown}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Arrow />
+                  Send Email
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Arrow />
+                  Send Email
+                </div>
+                </SubmitContent>
               </Submit>
             </Form.Submit>
           </Root>
@@ -176,8 +201,8 @@ const Submit = styled.button`
   right: 24px;
   ${textStyles.body2};
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  overflow: hidden;
   background-color: transparent;
   border: 2px solid ${colors.white};
   color: ${colors.white};
@@ -185,6 +210,7 @@ const Submit = styled.button`
   padding: 8px 18px 8px 10px;
   -webkit-transition: all 0.5s linear;
   transition: all 0.5s linear;
+  height: 45px;
 
   svg {
     padding-top: 4px;
@@ -202,6 +228,12 @@ const Submit = styled.button`
       drop-shadow(0 0 25px rgba(200, 200, 200, 0.5));
   }
 `;
+
+const SubmitContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`
 
 const Arrow = styled(ArrowSVG)`
   width: 24px;
