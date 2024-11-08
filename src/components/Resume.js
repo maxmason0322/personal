@@ -8,7 +8,7 @@ import { useRef, useEffect } from "react";
 
 export default function Resume() {
   const resumeUrl = "/assets/MaxMasonResume.pdf";
-  const textRef = useRef(null)
+  const textRef = useRef(null);
 
   const handleRedirect = (e, url) => {
     e.stopPropagation();
@@ -21,8 +21,8 @@ export default function Resume() {
       opacity: 1,
       duration: 1.5,
       delay: 1,
-    })
-  }, [textRef.current])
+    });
+  }, []);
 
   const downloadAnimation = () => {
     const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.2 });
