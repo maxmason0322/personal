@@ -161,7 +161,6 @@ function AppContent() {
           }}
           cols={{ lg: 6, md: 6, sm: 4, xs: 2 }}
           rowHeight={rowHeight}
-          // width={GRID_WIDTH}
           autoSize={true}
           margin={[margin, margin]}
           useCSSTransforms
@@ -215,8 +214,7 @@ function AppContent() {
             <AboutWrapper>
               <div>Max Mason</div>
               <AboutText>
-                {/* I love tech and learning how to create software. */}I love
-                Marls! Marls is the best!
+                I love tech and learning how to create software.
               </AboutText>
               <AboutText>
                 I'm currently working at{" "}
@@ -226,11 +224,9 @@ function AppContent() {
                   }}
                   onMouseDown={(e) => e.stopPropagation()}
                 >
-                  {/* Reform Collective */}
-                  Marls!
+                  Reform Collective
                 </ShimmerText>{" "}
-                {/* as a Junior Developer. */}
-                as a Lead Marls!
+                as a Junior Developer.
               </AboutText>
             </AboutWrapper>
           </Box>
@@ -249,7 +245,7 @@ function AppContent() {
               <HiddenChevron className="chevron2" />
               <HiddenChevron className="chevron3" />
             </Chevrons>
-            <div>Software I like using</div>
+            <div>Software I like to use</div>
             <Chevrons>
               <Chevron />
               <HiddenChevron className="chevron2" />
