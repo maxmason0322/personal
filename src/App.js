@@ -115,13 +115,13 @@ function AppContent() {
 
   const layouts = [
     [
-      { i: "linkedIn", x: 4.15, y: 0, w: 1.85, h: 2 },
+      { i: "linkedIn", x: 4, y: 0, w: 2, h: 2 },
       { i: "resume", x: 0, y: 5, w: 2, h: 0.8 },
       { i: "comingSoon", x: 0, y: 6, w: 2, h: 0.8 },
       { i: "contact", x: 2, y: 4, w: 4, h: 2 },
       { i: "marquee", x: 0, y: 3, w: 6, h: 0.8 },
-      { i: "about", x: 0, y: 0, w: 2.3, h: 2 },
-      { i: "github", x: 2.3, y: 0, w: 1.85, h: 2 },
+      { i: "about", x: 0, y: 0, w: 2, h: 2 },
+      { i: "github", x: 2, y: 0, w: 2, h: 2 },
       { i: "tech", x: 0, y: 4, w: 2, h: 0.8 },
     ],
     [
@@ -214,7 +214,7 @@ function AppContent() {
             <AboutWrapper>
               <div>Max Mason</div>
               <AboutText>
-                I love tech and learning how to create software.
+                I love tech and learning how to create great software.
               </AboutText>
               <AboutText>
                 I'm currently working at{" "}
@@ -226,7 +226,9 @@ function AppContent() {
                 >
                   Reform Collective
                 </ShimmerText>{" "}
-                as a Junior Developer.
+                as a
+                <br />
+                Junior Interactive Experience Developer.
               </AboutText>
             </AboutWrapper>
           </Box>
